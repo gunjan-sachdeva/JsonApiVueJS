@@ -1,0 +1,2147 @@
+Vue JS-
+
+installation-
+node js
+npm install @vue/cli --g
+
+Project creation-
+
+vue create blog
+
+run-
+
+npm run serve
+
+first program
+
+HelloWorld.vue
+
+<template>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <h1>MY first program in Vue JS</h1>
+    
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
+
+
+components-
+*component name should always in multi words,
+we can import components 2 times.
+
+HomePage.vue
+
+<template>
+
+<h1>home component</h1>
+</template>
+<script>
+export default{
+    name:'HomePage',
+}
+</script>
+
+<style  scoped>
+h1{
+    color: blanchedalmond;
+    background-color: green;
+    font-size: 40px;
+    text-align: center;
+}
+</style>
+
+*scoped-styling will be limited to only Component, without scoped it will reflecting to all the components of h1.
+
+
+
+import in App.Vue
+
+<template>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HomePage />
+</template>
+
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+import HomePage from './components/HomePage.vue'
+
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    HomePage
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
+
+
+What is interpolation? what we can do with interpolation? Pass data script to the template?
+
+-->it helps to use javascript variables, functions in html.
+
+eg:{{10+10}},{{"Hello".length}} 
+
+
+<template>
+
+<h1>Home component</h1>
+<h2>{{email}}</h2>
+<h2>{{mobile}}</h2>
+<h2>{{getName()}}</h2>
+</template>
+<script>
+
+export default{
+    name:'HomePage',
+    data()
+    {
+        return{
+                     email:'gunjan.sachdeva@netsmartz.com',
+             mobile: 656,
+             getName:function()
+             {
+                return "gunjan sachdeva"
+             }
+        }
+    }
+}
+</script>
+
+*here data is a predefined property,we have 4 predefined notations like data property,methods,computed property, watchers
+
+
+2nd way
+
+<h2>{{getName("gunjan sachdeva")}}</h2>
+
+
+getName:function(a)
+             {
+                // return "gunjan sachdeva"
+                return a;
+             }
+
+
+    
+
+
+
+How can we Define and use methods in Vue Js-
+
+<h2>Name {{getName("gunjan sachdeva")}}</h2>
+<h2>Name 2 {{getName("priya mehta")}}</h2>
+
+<script>
+export default {
+    name: 'HomePage',
+    data() {
+        return {
+            email: 'gunjan.sachdeva@netsmartz.com',
+             mobile: 656,
+             
+           
+    }
+    },
+    methods:{
+getName:function(a)
+             {
+                // return "gunjan sachdeva"
+                return a;
+             }
+    }
+}
+</script>
+
+*we can create more than one function inside method property
+*we can call only one obeject of function as well.
+*we can pass dynamic data
+*we can use this keyword to get the current data value.
+
+* create more than one function & we can call only object-
+
+<h3>{{getData()}}</h3>
+
+<h3>{{getData().profile}}</h3>
+
+
+ methods: {
+        getName: function (a) {
+            // return "gunjan sachdeva"
+            return a;
+        },
+        getData: function () {
+            return {
+                profile: "Training",
+                batch: "Vue Js"
+            }
+        }
+
+    }
+}
+
+
+Events:-
+
+1)How to use click event
+2)How to call function on click
+3)How to pass params with events
+4)Double click and mouse move event
+
+i)v-on:click
+ii)v-on:dblclick
+iii)v-onmousemove
+
+
+<template>
+    <h1>About component</h1>
+    <button v-on:click="test()">Click me</button>
+
+</template>
+<script>
+export default {
+    name:"AboutPage",
+    methods:{
+        test()
+        {
+            alert("welcome to the world of Vue Js")
+        }
+    }
+
+}
+</script>
+
+
+or
+
+<button v-on:click="test1('button clicked')">Click me</button>
+
+
+test1(name) {
+            alert(name);
+        }
+
+
+dblclick:-
+
+<button v-on:dblclick="test1('button clicked')">Double Click me</button>
+
+onmousemove:-
+
+
+<h1 v-on:mousemove="getConsole()">About component</h1>
+
+getConsole(){
+            console.warn("function called")
+        }
+
+or
+
+
+<button v-on:click="getData()">Click me</button>
+<h1>{{count}}</h1>
+
+
+
+data(){
+        return{
+            count:0
+        }
+    }
+
+methods: {
+getData(){
+this.count=this.count+1;
+        }
+    }
+
+
+Two way Binding In Vue js:-
+
+-->issue without two way binding
+
+
+
+MVVM-
+Model to View & view to model
+
+
+Model-Script tag
+View -template
+
+*we have to use v-model
+
+
+
+<template>
+    <h1>Two way binding</h1>
+    <input v-model="count"/>
+    <h1>{{count}}</h1>
+</template>
+
+<script>
+export default {
+    name:"TwoWay",
+    data(){
+        return{
+            count:0
+        }
+    }
+
+}
+</script>
+
+
+How can we get the valuesfrom the fields:-
+
+create 2 fields-make function for getting values-define data property-Apply 2 way binding
+
+<template>
+<h1>Get input field values</h1>
+<input type="text" placeholder="enter email" v-model="email" />
+<br /><br />
+<input type="password" placeholder="enter password" v-model="password" />
+<button v-on:click="getData()" type="button">Get Values</button>
+<h1>{{email}} {{password}}</h1>
+</template>
+
+<script>
+export default {
+    name: "GetFieldValue",
+    data() {
+        return {
+            email: null,
+            password: null,
+        }
+    },
+    methods: {
+        getData() {
+            console.warn("values",this.email,this.password);
+        }
+    }
+}
+</script>
+
+
+Get checkbox and radio button value:-
+
+*in case of checkbox if we give for to the label then while clicking on the label it will select checkbox.
+
+**id and for both value will be same.
+
+***same case with radio button.
+
+
+
+<template>
+    <h1>Get Checkbox and radio button value</h1>
+    <h3>Technology</h3>
+    <label for="java">Java</label>
+    <input type="checkbox" v-model="technology" value="java" id="java" />
+
+    <label for="php">PHP</label>
+    <input type="checkbox" v-model="technology" value="php" id="php" />
+
+    <label for="node">Node js</label>
+    <input type="checkbox" v-model="technology" value="node" id="node" />
+    <h4>Selected technology {{technology}} </h4>
+
+
+</template>
+<script>
+export default {
+    name:"GetCheckboxValue",
+    data()
+    {
+        return{
+            technology:[]
+        }
+    }
+
+}
+</script>
+
+
+Control statement:-  if else condition
+
+1)Creating Html code for show and hide.
+2)Apply if else condn
+3)if and else condition witha button click
+
+IfElse.vue
+
+
+<template>
+  <h1 v-if="show">If Else Condition</h1>  
+</template>
+<script>
+export default {
+    name:"IfElse",
+    data()
+    {
+        return{
+            show:true
+        }
+    }
+}
+</script>
+
+
+i)*if we use show:false , it will disappear
+
+ii) <button v-on:click="show=false">Show</button> ,after clicking button it will disappear.
+
+iii)  <button v-on:click="show=!show">Toggle</button> , for Toggle
+
+iv)<h1 v-if="show">If Else Condition</h1> 
+  <h1 v-else>else condition</h1>
+  <button v-on:click="show=false">Show</button> 
+  <button v-on:click="show=!show">Toggle</button> 
+
+       
+
+
+          For Loop and List:-
+
+For Loop
+
+<template>
+<h1>For Loop in Vue JS</h1>
+<ul>
+<li v-for="data in technology" :key="data">
+{{data}}
+    </li>
+</ul>
+</template>
+
+<script>
+export default {
+    name: "LoopList",
+    data() {
+        return {
+            technology: ["java", "Mern stack", "mean stack"]
+        }
+    }
+
+}
+</script>
+<style scoped>
+h1{
+    color:blue
+}
+</style>
+
+
+
+
+
+List:
+
+
+<template>
+<h1>For Loop in Vue JS</h1>
+<ul>
+    <li v-for="data in technology" :key="data">
+        {{data}}
+    </li>
+</ul>
+<br/>
+<br />
+<ul>
+<li v-for="item in user" :key="item">
+Name is
+{{item.name}} & Email is {{item.email}}
+</li> 
+</ul>
+</template>
+
+<script>
+export default {
+    name: "LoopList",
+    data() {
+        return {
+            technology: ["java", "Mern stack", "mean stack"],
+            user: [{
+                    name: "priya",
+                    email: "priya@gmail.com"
+                },
+                {
+                    name: "supriya",
+                    email: "supriya@gmail.com"
+                },
+                {
+                    name: "riya",
+                    email: "riya@gmail.com"
+                },
+            ]
+        }
+    }
+
+}
+</script>
+
+<style scoped>
+h1 {
+    color: blue
+}
+</style>
+
+
+
+How can we pass data to child component??
+
+1)make child component
+2)import and use child component
+3)pass static data
+4)pass property, object and function to child component
+
+1)Pass Data via Props:-
+
+PassData.vue
+
+
+<template>
+   <h1>pass data to child component</h1>
+<ChildForPassData name="gunjan" />
+</template>
+<script>
+import ChildForPassData from './ChildForPassData.vue'
+
+export default {
+    name:"PassData",
+    components:{
+        ChildForPassData
+    }
+    
+}
+</script>
+<style scoped>
+h1{
+    color: brown;
+}
+</style>
+
+
+ChildForPassData.vue
+
+<template>
+    <h2>child component</h2>
+    <h1>{{name}}</h1>
+</template>
+<script>
+export default {
+    name:"ChildForPassData",
+    props:{
+        name:String
+    }
+}
+</script>
+
+
+2)Pass data via object:-
+
+PassData.vue
+
+<template>
+   <h1>pass data to child component</h1>
+<ChildForPassData name="gunjan" :user="user"/>
+</template>
+<script>
+import ChildForPassData from './ChildForPassData.vue'
+
+export default {
+    name:"PassData",
+    data()
+    {
+        return{
+            user:{name:"abc",email:"abc@gmail.com"}
+        }
+    },
+    components:{
+        ChildForPassData
+    }
+    
+}
+</script>
+<style scoped>
+h1{
+    color: brown;
+}
+</style>
+
+
+
+ChildForPassData.vue
+
+
+
+<template>
+    <h2>child component</h2>
+    <h1>{{name}}</h1>
+    <h2>{{user.name}} {{user.email}}</h2>
+</template>
+<script>
+export default {
+    name:"ChildForPassData",
+    props:{
+        name:String,
+        user:Object
+    }
+}
+</script>
+
+3)yes we can call parent function inside child component.
+
+
+PassData.vue
+
+<template>
+   <h1>pass data to child component</h1>
+<ChildForPassData name="gunjan" :user="user"  :getData="getData"/>
+</template>
+<script>
+import ChildForPassData from './ChildForPassData.vue'
+
+export default {
+    name:"PassData",
+    data()
+    {
+        return{
+            user:{name:"abc",email:"abc@gmail.com"}
+        }
+    },
+    methods:{
+    getData()
+    {
+        //console.warn("parent function called");
+        alert("hello");
+    }
+    },
+    components:{
+        ChildForPassData
+    }
+    
+}
+</script>
+<style scoped>
+h1{
+    color: brown;
+}
+</style>
+
+ChildForPassData.vue
+
+<template>
+    <h2>child component</h2>
+    <h1>{{name}}</h1>
+    <h2>{{user.name}} {{user.email}}</h2>
+    <button v-on:click="getData()">Call parent function</button>
+</template>
+<script>
+export default {
+    name:"ChildForPassData",
+    props:{
+        name:String,
+        user:Object,
+        getData:Function
+    }
+}
+</script>
+
+
+
+How to reuse components:-
+
+
+ReuseParent.vue
+
+<template>
+<h1>Reuse Component</h1>
+<ul>
+<li v-for="item in users" :key="item">
+<!-- {{item.name}}
+{{item.email}} -->
+<ReusePage :data="item" />
+</li>
+</ul>
+
+</template>
+
+<script>
+import ReusePage from "./ReusePage.vue";
+export default {
+    name: "ReuseParent",
+    components: {
+        ReusePage
+    },
+    data() {
+        return {
+            users: [{
+                    name: "gunjan",
+                    email: "gunjan@gmail.com"
+                },
+                {
+                    name: "muskan",
+                    email: "muskan@gmail.com"
+                },
+                {
+                    name: "ishika",
+                    email: "ishika@gmail.com"
+                },
+            ]
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+ReusePage.vue
+
+
+<template>
+    <div class="user">
+    <h2>{{data.name}}</h2>
+    <h2>{{data.email}}</h2>
+
+
+    </div>
+</template>
+<script>
+export default {
+    name:"ReusePage",
+    props:{
+        data:Object
+    }
+
+}
+</script>
+<style scoped>
+
+</style>
+
+
+i)if we have so many properties like name,email,address,city,phone etc. then the code is so heavy so to avoid this
+
+1) add Reusepage with props inside for loop (ReuseParent.vue)
+
+2)define props inside Reusepage.vue
+
+
+
+eg-2
+
+1)create button onclick-getData()
+
+but it will show with all the div 
+
+2)we want it with one div
+
+3)cut the method from ReusePage.vue and make it inside the ReuseParent.vue
+4)pass the getData as props inside ReusePage component.
+
+5)define getData in props inside ReusePage.vue
+6)add, after methods.
+
+* we can pass parameters inside function as well and get the value.
+
+****instead of v-on:click we can use @click means for events instead of v-on we use @
+
+*****instead of v-bind we can use :
+
+
+
+ HTML BINDING:-
+why we need html binding? how to apply? & how to apply 2 html tag binding?
+
+
+
+if we want to print the data and that data is inside the tag ? by normal interppollation it will give the same tag output
+
+1)we have to use v-html
+
+
+<template>
+  <h1>{{text}}</h1>
+  <!-- {{tag}}   -->
+  <h2 v-html="tag1"></h2>
+  <div v-html="tag2">
+  </div>
+</template>
+<script>
+export default {
+    name:"HtmlBinding",
+    data()
+    {
+        return{
+            text:"gunjan",
+            tag1:"<h1>Vue Js</h1>",
+             tag2:"<h1>gunjan@gmail.com</h1>"
+
+        }
+    }
+}
+</script>
+
+
+
+Class Binding:-
+
+--How can we add simple class?
+--change class on button click?
+--dynamic class with function?
+
+
+when we create project it is not necessary that all the classes are static, some classes we have to add dynamically i.e, on click button color change or showing error then these classes will come dynamically from javascript.
+
+1)create <h1>
+2)perform style
+3)add property in data
+4)bind class property with <h1> :class="{green:true}"
+5)create button
+6)if we have so many dynamic classes ten we have to create computed property create method inside it and put all the dynamic class code inside it.
+7)call that function inside <h2 :class="applyStyle">
+
+
+<template>
+<h1>we r working on class Binding</h1>
+  <h2 :class="applyStyle">Class Binding</h2>
+  <button @click="colorfull=!colorfull">Apply Style</button>
+
+</template>
+<script>
+export default {
+    name:"ClassBinding",
+data()
+{
+    return{
+    colorfull:false
+    }
+},
+computed:{
+    applyStyle()
+    {
+        return{
+          green:this.colorfull,
+          err:true,
+          other:true
+        }
+    }
+}
+}
+</script>
+<style scoped>
+h1{
+    color:orange;
+}
+.green{
+    background-color: bisque;
+    width: 200px;
+    padding: 10px;
+}
+.err{
+    color: red;
+}
+.other{
+    font-size: 50px;
+}
+</style>
+
+
+
+Props:--
+
+what are props?
+How to pass data with props?
+what we can pass with props?
+
+PropsData.vue
+
+<template>
+<h1> Props in Vue Js 3</h1>
+    <StudentForProps name="gunjan sachdeva" />
+    <TeacherForProps technology="Vue Js"/>
+   
+</template>
+<script>
+
+import StudentForProps from './StudentForProps.vue'
+import TeacherForProps from './TeacherForProps.vue'
+
+
+
+
+export default {
+    name:"PropsData",
+    
+    components:{
+        StudentForProps,
+        TeacherForProps,
+     
+    }
+    
+}
+</script>
+<style scoped>
+h1{
+    color: orange;
+}
+</style>
+
+
+
+StudentForProps.vue
+
+
+<template>
+   <h1>Student data</h1>
+   <h1>My name is {{name}}</h1> 
+</template>
+<script>
+export default {
+    name:"StudentForProps",
+    props:{
+        name:String
+    }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+TeacherForProps.vue
+
+<template>
+    <h1>My technology is {{technology}}</h1>
+</template>
+<script>
+export default {
+    name:"TeacherForProps",
+    props:{
+        technology:String
+    }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+How can we send data from child to parent component??
+
+* Nested component is called as child component and parallel component is called as sibling component.
+
+1)Make child component
+2)pass data and function as props
+3)share child component with parent
+
+
+i)Create Child Component.
+ii)import inside parent
+iii)inside child create data property
+iv)insideparent create methods property
+v)pass the above method inside child component as props(at parent component only)
+vi)define props in Child  component
+vii)create button and call function on click.
+
+
+
+
+ParentForChildToParentData.vue
+
+
+<template>
+<h1></h1>
+<ChildToParentData :getUserName="getUserName" />
+</template>
+
+<script>
+import ChildToParentData from './ChildToParentData.vue'
+
+export default {
+    name: "ParentForChildToParentData",
+    components: {
+        ChildToParentData
+    },
+    methods: {
+        getUserName(name) {
+            alert(name)
+        }
+    }
+
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+        ChildToParentData.vue
+
+<template>
+<h1></h1>
+<ChildToParentData :getUserName="getUserName" />
+</template>
+
+<script>
+import ChildToParentData from './ChildToParentData.vue'
+
+export default {
+    name: "ParentForChildToParentData",
+    components: {
+        ChildToParentData
+    },
+    methods: {
+        getUserName(name) {
+            alert(name)
+        }
+    }
+
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+Ref in Vue JS 3:-
+
+*To set or get the value of DOM we use Ref , in one form we can use as many as Ref we want.
+
+eg 1:- input field--error coming--focus to that fiels we can do by ref.
+
+eg 2:-update form value
+eg3:-set form style
+
+RefDemo.vue
+
+<template>
+    <h1>Ref In Vue JS 3</h1>
+    <input type="text" ref="input">
+    <button v-on:click="getData">Click me</button>
+</template>
+<script>
+export default {
+   name:"RefDemo" ,
+   methods:{
+    getData(){
+        this.$refs.input.focus();
+        let val= this.$refs.input.value;
+        console.warn(val);
+        this.$refs.input.style.color="red"
+    }
+   }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+
+FORM in Vue JS :-
+
+input  fields--apply 2 way binding--print and submit value
+
+
+SimpleForm.vue
+
+<template>
+  <h1>Simple Form</h1> 
+  <p>{{form}}</p> 
+  <form>
+  <label for="">Email:</label>
+  <input type="text" placeholder="Enter email" v-model="form.email" />
+
+  <br /> <br />
+
+  <label for="">Password</label>
+  <input type="password" placeholder="Enter password" v-model="form.password" />
+
+    <br /> <br />
+
+    <button @click="login" type="button">Login</button>
+  </form>
+</template>
+<script>
+export default {
+    name:"SimpleForm",
+    data()
+    {
+        return{
+            form:{
+                email:"",
+                password:""
+            }
+        }
+    },
+    methods:{
+        login()
+        {
+            console.warn("login data",this.form);
+        }
+    }
+
+}
+</script>
+<style scoped>
+
+</style>
+
+
+---Add radio button , checkbox and select box , define property and bind values, print and submit value.
+
+<template>
+  <h1>Simple Form</h1> 
+  <p>{{form}}</p> 
+  <form>
+  <label for="">Email:</label>
+  <input type="text" placeholder="Enter email" v-model="form.email" />
+
+  <br /> <br />
+
+  <label for="">Password</label>
+  <input type="password" placeholder="Enter password" v-model="form.password" />
+
+    <br /> <br />
+    <select v-model="form.country">
+    <option value="india">India</option>
+    <option value="china">China</option>
+    <option value="USA">USA</option>
+    </select>
+ <br /> <br />
+ <h3>Technology</h3>
+ <label for="">JAVA</label>
+ <input type="checkbox" value="java" v-model="form.technology">
+ <br /> <br />
+ <label for="">MEAN STACK</label>
+ <input type="checkbox" value="mean" v-model="form.technology">
+ <h3>Gender</h3>
+<label for="">Male</label>
+<input type="radio" value="male" name="gender" v-model="form.gender">
+<br><br>
+<label for="">FeMale</label>
+<input type="radio" value="female" name="gender" v-model="form.gender">
+<br><br>
+    <button @click="login" type="button">Login</button>
+  </form>
+</template>
+<script>
+export default {
+    name:"SimpleForm",
+    data()
+    {
+        return{
+            form:{
+                email:"",
+                password:"",
+                country:"",
+                technology:[],
+                gender:""
+            }
+        }
+    },
+    methods:{
+        login()
+        {
+            console.warn("login data",this.form);
+        }
+    }
+
+}
+</script>
+<style scoped>
+
+</style>
+
+Form Validation:-
+
+add error property,apply loop over form files and collect error, use for loop show error
+
+SimpleForm.vue
+
+<template>
+<h1>Simple Form</h1>
+<ul>
+<li v-for="item in error" v-bind:key="item">
+{{item}} not valid
+</li></ul>
+<p>{{form}}</p>
+<form>
+    <label for="">Email:</label>
+    <input type="text" placeholder="Enter email" v-model="form.email" />
+
+    <br /> <br />
+
+    <label for="">Password</label>
+    <input type="password" placeholder="Enter password" v-model="form.password" />
+
+    <br /> <br />
+    <select v-model="form.country">
+        <option value="india">India</option>
+        <option value="china">China</option>
+        <option value="USA">USA</option>
+    </select>
+    <br /> <br />
+    <h3>Technology</h3>
+    <label for="">JAVA</label>
+    <input type="checkbox" value="java" v-model="form.technology">
+    <br /> <br />
+    <label for="">MEAN STACK</label>
+    <input type="checkbox" value="mean" v-model="form.technology">
+    <h3>Gender</h3>
+    <label for="">Male</label>
+    <input type="radio" value="male" name="gender" v-model="form.gender">
+    <br><br>
+    <label for="">FeMale</label>
+    <input type="radio" value="female" name="gender" v-model="form.gender">
+    <br><br>
+    <button @click="login" type="button">Login</button>
+</form>
+</template>
+
+<script>
+export default {
+    name: "SimpleForm",
+    data() {
+        return {
+            form: {
+                email: "",
+                password: "",
+                country: "",
+                technology: [],
+                gender: ""
+            },
+            error: [],
+        }
+    },
+    methods: {
+        login() {
+            for (const item in this.form) {
+                if (this.form[item] === "" || this.form[item].length === 0) {
+                    this.error.push(item)
+
+                }
+            }
+            if (this.error.length === 0) {
+                alert("data has been submitted");
+            }
+            console.warn("login data", this.form);
+        }
+    }
+
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+Form Modifiers:-
+
+we use form modifier on input fields.
+
+eg:1
+if out focus from the field then only the value get reflected. i.e. lazy
+eg:2
+if we don't want space between before entering the name inside the input field i.e. trim
+
+eg.3 typeof()
+
+* yes we can use more than one form modifier in Form.
+
+
+
+ FormModifiers.vue
+
+<template>
+    <h2>Form Modifier</h2>
+    <input type="text" v-model.lazy="data">
+        <h2>{{data}} is data</h2>
+    <h2>TRIM</h2>
+    <input type="number" v-model.trim="data1">
+        <h2>{{data1}} is data</h2>
+<h2>typeof()</h2>
+    <input type="number" v-model.number.lazy="data2">
+        <h2> data is {{typeof(data2)}}</h2>
+        <h2> data is {{data2}}</h2>
+</template>
+<script>
+export default {
+    name:"FormModifier",
+data(){
+    return{
+        data:'',
+        data1:'',
+        data2:''    }
+}
+}
+</script>
+<style scoped>
+
+</style>
+
+
+
+Non Props data:-
+
+make child component
+pass non props data
+difference between props and non props data
+
+* when we use props data we have to define the type.
+
+* no need to define the type of non props data , it is static data and we use it rarely.
+
+1)create child
+2)import in parent
+3)pass id in child component inside Parent component and   it will show on div at console.
+
+*but if we remove the div it will not reflect on any element because div is a wraper of that non props but if we want to bind that id with element then we have to use v-bind="$attrs"
+
+* if we take both div and as well as v-bind="$attrs" then it will add that id with both div and element.
+
+*If we want to remove the id on parent i.e, div or wrapper then we have to use inheritAttrs=false
+
+
+Computed Property:-
+
+
+* difference b/w template expression and computed property
+
+In-template expressions are very convenient, but they are meant for simple operations. Putting too much logic in your templates can make them bloated and hard to maintain.
+
+That's why for complex logic that includes reactive data, it is recommended to use a computed property.
+
+we use computed property when we want to do some complex calculations.
+
+*the performance of the computed properties  are very efficient rather than methods and normal template expressions.
+
+*If we executecomputed property again and again then it retrive the data from there cache, when only the value get changed then only it re-evaluates.
+
+Normal template  expression-
+<template>
+{{data}}
+
+</template>
+<script>
+data()
+{
+data:"hello"
+}
+</script>
+
+we can perform simple operation with the help of template expression, but if we are doing same calculations and long calcualtions again and again then we don't prefer template expression or data property.
+
+we use computed property because for same calculations again and again we will get the data from the cache then  the speed will be increased.
+
+<template>
+   <h1>Computed Property</h1>
+   <!-- <h2>{{(dollars*rupeeval)-discount}}</h2>
+   <h2>{{(dollars*rupeeval)-discount}}</h2>
+   <h2>{{(dollars*rupeeval)-discount}}</h2>  -->
+   <h2>{{getResult}}</h2>
+</template>
+<script>
+export default {
+    name:"ComputedProperty",
+    data()
+    {
+        return{
+            dollars:100,
+            rupeeval:70,
+            discount:10
+        }
+    },
+    computed:{
+        getResult()
+        {
+            return (this.dollars*this.rupeeval)-this.discount;
+        }
+    }
+}
+</script>
+<style scoped>
+
+
+</style>
+
+
+
+Watchers:-
+
+when we have data properties, watchers observe these data properties. when the changes are performed in data properties then on the behalf of the change they call function.
+
+*we can create watchers as we create methods:{} property and we keep the method of watchers there.
+
+*Always remember that the name of the property and watchers will be same.
+
+1)Create data property
+2) create button + or -
+3)we want to create one watcher that will observe the property of increment and decrement.
+
+*the property name is count then the method inside  the watch is count otherwise it will not work.
+
+watch:{
+count()
+{
+}
+}
+
+
+Watchers.vue
+
+<template>
+<h1>Watchers</h1>
+  <h1>{{count}}</h1>  
+  <button @click="count=count+1">+</button>
+  <button @click="count=count-1">-</button>
+
+</template>
+<script>
+export default {
+    name:"WatchersDemo",
+data()
+{
+    return{
+        count:0
+    }
+},
+watch:{
+    count(val)
+ {
+//eg:1- alert("value changed");
+if(val>5)
+{
+alert("stop counting");
+}
+
+    }
+}
+}
+</script>
+<style scoped>
+
+h1{
+    color: blue;
+}
+</style>
+
+
+Slots:-
+
+The limitations of components can be overcome by slots.It is very advance topic in Vue js.
+
+when we reuse component then the problem is we can reuse only one type of data, let suppose we have dynamic data and one time we have to pass json or array or h1 or image and we have to render it  in child component then it is impossible in terms of component if we do so then we have to write so much functionality  and logic.
+
+but slots cuts all this and give us easy solution.
+
+1)create Child component 
+2)import in parent
+3)we can give default value to the slots like:
+<Slot>Child Component</Slot>
+or 
+<slot><h1>My name is gunjan</h1></slot>
+
+*Slots & multiple slot with name slots:-
+
+If  we want to define more than one slot then we have to define the name of the slot.
+
+If we bind slot with element then that will be its template tag.
+
+Yes we can create slot inside slot.
+
+
+
+
+
+SlotsChild.vue
+
+<template>
+
+<div class="cart">
+<header>
+    <slot name="header"></slot>
+</header>
+<content>
+    <slot name="main"></slot>
+</content>
+
+<footer>
+    <slot name="footer">
+    <button>Click me</button>
+    
+    </slot>
+</footer>
+
+</div>
+</template>
+
+<script>
+export default {
+    name: "SlotsChild"
+}
+</script>
+<style scoped>
+.cart{
+
+  border: 1px solid red;
+  text-align: center;
+  width: 170px;
+  padding: 20px;
+float: left;
+margin-left: 10px;
+}
+</style>
+
+
+
+SlotsParent.vue
+
+
+
+<template>
+<h1>Slots in Vue js 3</h1>
+<!-- <SlotsChild>
+    <h1>Passing data from parent to child via tag</h1>
+</SlotsChild>
+<SlotsChild><a href="#">Click here please</a></SlotsChild>
+<SlotsChild><img src="https://www.google.com/search?rlz=1C1RXQR_enIN1018IN1018&q=flower+images&tbm=isch&chips=q:flowers+images,g_1:wallpaper:BwrxPbQbVHE%3D&usg=AI4_-kQjuvjutxozeAWqWx5OZE0Sv7EprQ&sa=X&ved=2ahUKEwjx_-uvq-P_AhVJdXAKHSb2DF8QgIoDKAF6BAgbEBU&biw=1366&bih=616&dpr=1" alt=""></SlotsChild> -->
+
+<SlotsChild>
+
+    <template v-slot:header>
+        <h1>Vue Js</h1>
+
+    </template>
+
+    <template v-slot:main>
+        <p>A vue Js Product</p>
+    </template>
+    <template v-slot:footer>
+        <button>Buy Now</button>
+    </template>
+
+</SlotsChild>
+
+<SlotsChild>
+
+    <template v-slot:header>
+        <h1>React Js</h1>
+
+    </template>
+
+    <template v-slot:main>
+        <p>A React Js Product</p>
+    </template>
+    <template v-slot:footer>
+        <!-- <button>Buy Now</button> -->
+    </template>
+
+</SlotsChild>
+
+
+</template>
+
+<script>
+import SlotsChild from './SlotsChild.vue'
+
+export default {
+    name: "SlotsParent",
+    components: {
+        SlotsChild
+    }
+}
+</script>
+
+
+Dyamic Components:-
+
+
+1)Create component Java ,Node, PHP
+
+2)import in Home.vue
+3)create <component :is="tab" />
+
+4)create data property
+
+ data(){
+return{
+tab:'Java'
+}
+}
+
+5)give <button @click="tab='Java'">Load JAVA</button>
+
+6)we can create nested tab inside all the components.
+
+
+JavaComp.vue
+
+<template>
+    <h1>JAVA content</h1>
+</template>
+<script>
+export default {
+    name:"JavaComp"
+}
+</script>
+<style scoped>
+
+</style>
+
+
+NodeComp.vue
+
+<template>
+    <h1>Node Content</h1>
+</template>
+<script>
+export default {
+    name:"NodeComp"
+}
+</script>
+<style scoped>
+
+</style>
+
+
+
+PhpComp.vue
+
+
+<template>
+   <h1>PHP content</h1> 
+</template>
+<script>
+export default {
+    name:"PhpComp"
+}
+</script>
+<style scoped>
+
+</style>
+
+
+HomeComp.vue
+
+
+<template>
+  <h1>Dynamic components</h1> 
+  <button @click="tab='JavaComp'">Load Java</button> 
+  <button @click="tab='NodeComp'">Load Node Js</button>
+  <button @click="tab='PhpComp'">Load Php</button>
+
+  <component :is="tab" />
+  <!-- <JavaComp />
+  <PhpComp />
+  <NodeComp /> -->
+
+</template>
+<script>
+import JavaComp from './JavaComp.vue'
+
+import PhpComp from './PhpComp.vue'
+import NodeComp from './NodeComp.vue'
+
+
+export default {
+    name:"HomeComp",
+    components:{
+      JavaComp,
+      PhpComp,
+      NodeComp
+    },
+    data()
+    {
+      return{
+        tab:'JavaComp'
+      }
+    }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+Teleport Component & use of teleport component in VueJs:-
+
+It is a advance topic in Vue js.
+
+
+if we want to load our content outside the <div id="app"></div>(inside index.html) then we can do it by teleport component.
+
+eg.
+
+let suppose we want static component i.e., footer then create  html outside the <div id="app"> but if we want to make it dynamic then we can teleport that component.
+
+1)inside index.html create <div id="footer"></div>
+
+2)create component footer 
+
+3)import in  Home.vue
+
+4)Home.vue---<teleport></teleport>
+
+
+Life Cycle Method:-
+
+Live example-before birth(egg,sperm)--baby--child--young person--adult
+
+
+
+
+1)Create-when the structure of the component is ready.
+
+2)mount-when we add the data property within it.
+
+3)update-button click-api call
+
+4)unmount-when we remove the component from the DOM.
+
+
+Every phase has two methods:-
+
+1)beforeCreate()
+2)created()
+
+*Every component has its own life cycle.
+
+beforeCreate()- when our component starts loading.
+
+created()-when the javascript part is ready then it will load.
+
+
+*if we change the value of the property inside beforeCreate() then it will not changed because the method called before, after that the properties are defined.
+
+*if we change the value of property inside created() then it will change because it will executed after the data property is defined.
+
+1)beforeCreate(){}
+2)data(){}
+3)created(){}
+
+
+
+beforeCreate(){} & created(){}
+
+
+HomeComp.vue
+
+
+<template>
+    <h1>beforeCreate and created {{name}}</h1>
+</template>
+<script>
+export default {
+    name:"HomeComp",
+    data()
+    {
+        console.warn("created");
+        return{
+            name:"Gunjan"
+        }
+    },
+    beforeCreate()
+    {
+        //  this.name="Sachdeva"; no change will reflect
+        alert("before Create");
+       
+    },
+    created()
+    {
+          this.name="Sachdeva";
+        alert("created");
+    }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+Mount:-
+
+1)beforeMount()-
+
+It will work when the html part just start mounting, it will work before it.
+
+2)mounted()-
+
+it will work when the template will mounted with the component.
+
+
+*create component
+* $el means element i.e., template part
+
+-->can we access html DOM in beforeMount() with id or with Ref???
+Ans-No
+
+* if we want to access we can access in mounted().
+
+
+
+MountComp.vue
+
+<template>
+<h1>beforeMount and mounted {{name}}</h1>
+<h2>Working on Mount Life cycle phase</h2>
+</template>
+
+<script>
+export default {
+    name: "MountComp",
+    data() {
+        return {
+            name: "Gunjan"
+        }
+
+    },
+    beforeMount() {
+        console.warn("beforeMount", this.$el)
+    },
+    mounted() {
+        console.warn("beforeMount", this.$el)
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+update():-
+
+
+1)beforeUpdate()-
+when the UI will about to update , just before it
+
+2)updated()
+
+Let suppose we have button and we are updating my name to click the button, then while click on the button then before updating the name on the UI the life cycle method call. i.e., beforeUpdate()
+
+and after updating the name the life cycle method call i.e., updated()
+
+* it belongs to UI not belongs to data() property.
+
+*current value-beforeUpdate()
+*updated value-updated()
+
+*they use at the time of login(to check authentication)
+
+*age authentication
+*to check if condition, on the basis of value.
+
+
+UpdateComp.vue
+
+<template>
+<h1 ref="count">{{counter}}</h1>
+<button @click="counter=counter+1">Update Count</button>
+</template>
+
+<script>
+export default {
+    name: "UpdateComp",
+    data() {
+        return {
+            counter: 0
+        }
+    },
+    beforeUpdate() {
+        // console.log("beforeUpdate",this.counter);
+        console.log("beforeUpdate", this.$refs['count'].textContent);
+
+    },
+    updated() {
+        // console.log("beforeUpdate",this.counter);
+        console.log("Updated", this.$refs['count'].textContent);
+
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+UnMount():-
+
+
+1)beforeUnmount()-
+
+
+2)unmounted()
+
+when any component remove from the DOM then both these methods are called.
+
+button(click)--component hide
+
+*to increase the performance of the application we have to remove the component.
+
+*Everytime when the component get remove we have to call API and to call that data in another component.
+
+1)create UnmountComp.vue
+
+If we have to perform something on component just before removing the component from the DOM that we can do in beforeunmount()
+or
+the thing which we have to perform after removing the component from the DOM i.e., inside unmounted()
+
+*The difference is UI is not available in unmounted() but it is available in beforeUnmount()
+
+UserUnmount.vue
+
+
+<template>
+    <h1>User component</h1>
+</template>
+<script>
+export default {
+    name:"UserUnmount",
+    beforeUnmount(){
+        console.log("before Unmount");
+    },
+    unmounted()
+    {
+        console.log("unmounted");
+    }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+UnmountComp.vue
+<template>
+    <h1 ref="user">User component</h1>
+</template>
+<script>
+export default {
+    name:"UserUnmount",
+    beforeUnmount(){
+        // console.log("before Unmount");
+        console.log("before Unmount",this.$refs['user']);
+    },
+    unmounted()
+    {
+        // console.log("unmounted");
+        console.log("Unmounted",this,$refs['user']);
+    }
+}
+</script>
+<style scoped>
+
+</style>
+
+
+Routing:-
+
+1)npm i vue-router@next
+
+2)create src->routes.js
+3)import { createWebHistory,createRouter } from "vue-router";
+
+*createRouter is a HOC(High order component)
+
+4)create components HomeComp.vue(import in routes.js)
+5)main.js(import  routes.js)
+6)App.vue (Link)
+7)Create more components login ,profile
+
+
+routes.js
+
+import { createWebHistory,createRouter } from "vue-router";
+import HomeComp from './components/HomeComp'
+import LoginComp from './components/LoginComp'
+import ProfileComp  from './components/ProfileComp'
+const routes=[
+    {
+name:'HomeComp',
+path:'/',
+component:HomeComp
+
+    },
+    {
+        name:'LoginComp',
+        path:'/login',
+        component:LoginComp
+        
+            },
+            {
+                name:'ProfileComp',
+                path:'/profile',
+                component:ProfileComp
+                
+                    }
+];
+const router=createRouter({
+    history:createWebHistory(),
+    routes
+});
+export default router;
+
+
+
+
+main.js
+
+import { createApp } from 'vue'
+
+import App from './App.vue'
+import router from './routes';
+
+
+createApp(App).use(router).mount('#app')
+
+
+
+
+App.vue
+
+<template>
+<router-link to="/">Home</router-link>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<router-link to="/login">Login</router-link>
+
+&nbsp;
+&nbsp;
+&nbsp;
+<router-link to="/profile">Profile</router-link>
+<router-view></router-view>
+</template>
+
+<script>
+
+
+export default {
+  name: 'App',
+  components: {
+   
+  }
+}
+</script>
+
+<style>
+
+</style>
+
+
+
+Dynamic Routing:-
+
+If we want to send the dynamic data over the url.
+i.e.,localhost:8080/profile/100
+
+1)App.vue(create link)
+2)routes.js(perform changes)
+3)we can fetch that data on profile page,ProfileComp.vue(changes perform)
+
+generally we send id of the candidate and after visit to the profile  page on the behalf of that id we get the data of that particular candidate from the database using API.
+
+*we can pass multiple values as well.like
+path:/profile:/name:/phone
+
+
+404 PAGE NOT FOUND:-(routing folder)
+1)create component
+2)add path in routes
+
+
+API-Application Programming interface
+
+*Between two programming language there is one interface that share data between them.
+
+but why??
+
+JS can't connect with database directly, it only manipulate the data i.e,string value, object etc.
+
+with the help of API they get data from the database they don'thave power to directly connect with database.
+
+-->PHP, NODE JS,Python , JAVA we create API and intergrate in VUE JS,REACT OR ANGULAR
+
+-->Once the API made we can use it in android,IOS because similar data visible over all the devices. 
+
+Like Bookmyshow, Railway ticket booking etc.
+eg:-Payment API for web, android and IOS same, it shows similar data.
+
+
+* we can integrate API By different ways in different platform.but testing by same POSTMAN.
+
+1)install axios
+
+2)test API with POSTMAN
+3)make function to call API
+4)Call API and store API data
+
+
+npm install axios
+
+API-
+
+https://reqres.in/api/users?page=1
+
+POST API USED  TO SEND DATA:-
+
+
+make Fake APi- go to https://www.npmjs.com/package/json-server
+
+1)install json server
+2)make db.json
+3)create Api
+4)check via postman
+
+
+
